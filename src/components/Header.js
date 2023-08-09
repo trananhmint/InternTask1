@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import './index.css';
 import {
   HomeOutlined,
@@ -21,29 +19,13 @@ import {
   EllipsisOutlined,
   BorderlessTableOutlined,
   PhoneOutlined,
-  AudioOutlined,
 
 } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Layout, Menu, theme, Image, Avatar } from 'antd';
-import { Button, Input, Space, Table, Select, Tag, } from 'antd';
-import Index from './components/Index';
-import Dashboard from './components/Dashboard';
-import PhongBan from './components/PhongBan';
-import AllStaff from './components/AllStaff';
+import { Button, Input, Space, Table, Select } from 'antd';
 // import DataPhongBan from './Data/DataPhongBan';
 const { Header, Content, Footer, Sider } = Layout;
-
-const { Search } = Input;
-
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#1677ff',
-    }}
-  />
-);
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -53,24 +35,122 @@ function getItem(label, key, icon, children) {
   };
 }
 
+const data = [
+  {
+    key: '1',
+    id: '1',
+    department: 'Sales',
+    name: 'Nguyen Van Quan Ly',
+    number: '3',
+    email: 'hrstaff@test.com',
+    phone: '012345678',
 
+  },
+  {
+    key: '2',
+    id: '2',
+    department: 'Marketing',
+    name: 'Nguyen Van A',
+    number: '0',
+    email: 'marketing@test.com',
+    phone: '012345678',
+  },
+  {
+    key: '3',
+    id: '3',
+    department: 'Finance',
+    name: 'Nguyen Van B',
+    number: '3',
+    email: 'finance@test.com',
+    phone: '0128123',
+  },
+  {
+    key: '4',
+    id: '4',
+    department: 'Human Resource',
+    name: 'Nguyen Van C',
+    number: '3',
+    email: 'hr@test.com',
+    phone: '012345678',
+  },
+  {
+    key: '5',
+    id: '5',
+    department: 'Operations',
+    name: 'Nguyen Van D',
+    number: '4',
+    email: 'op@test.com',
+    phone: '012345678',
+  },
+  {
+    key: '6',
+    id: '6',
+    department: 'Engineering',
+    name: 'Nguyen Van E',
+    number: '10',
+    email: 'engineer@test.com',
+    phone: '0987654',
+  },
+  {
+    key: '7',
+    id: '7',
+    department: 'Customer Support',
+    name: 'Nguyen Van F',
+    number: '5',
+    email: 'support@test.com',
+    phone: '456724',
+  },
+  {
+    key: '8',
+    id: '8',
+    department: 'Research & Development',
+    name: 'Nguyen Van G',
+    number: '3',
+    email: 'research@test.com',
+    phone: '8976756428',
+  },
+  {
+    key: '9',
+    id: '9',
+    department: 'Quality Assureance',
+    name: 'Nguyen Van E',
+    number: '10',
+    email: 'qa@test.com',
+    phone: '09083456',
+  },
+  {
+    key: '10',
+    id: '10',
+    department: 'Design',
+    name: 'Nguyen Van A',
+    number: '5',
+    email: 'design@test.com',
+    phone: '0795435',
+  },
+  {
+    key: '11',
+    id: '11',
+    department: 'Chăm sóc khách hàng',
+    name: 'Nguyen Van F',
+    number: '7',
+    email: 'abc@test.com',
+    phone: '056781234',
+  },
+
+];
 
 const items = [
-  getItem(<b>Nguyen Van Quan Ly</b>, 'account',
+  getItem('Nguyen Van Quan Ly', 'account',
+    <Space wrap size={16}>
       <Avatar shape="square" size={30} icon={<Image src='https://cdn-icons-png.flaticon.com/512/168/168734.png' />} />
+    </Space>
   ),
-  getItem(
-    <Link to="/dashboard">Dashboard </Link>,
-    'Dashboard',  
-    <HomeOutlined />),
+  getItem('Dashboard', '1', <HomeOutlined />),
 
   getItem('NHÂN VIÊN', 'sub1', <UserOutlined />, [
-    getItem(
-    <Link to="/phongban">Phòng Ban </Link>,
-    'Phòng Ban',  
-    <TeamOutlined />),
+    getItem('Phòng Ban', '2', <TeamOutlined />),
     getItem('Phòng Ban Của Tôi', '3', <UserOutlined />),
-    getItem(<Link to="/allstaff">Toàn Bộ Nhân Viên </Link>,'Toàn Bộ Nhân Viên', <TeamOutlined />),
+    getItem('Toàn Bộ Nhân Viên', '4', <TeamOutlined />),
     getItem('Tạo Nhân Viên Mới', '5', <UserAddOutlined />)
   ]),
 
@@ -136,6 +216,30 @@ const App = () => {
   const onSearch = (value) => {
     console.log('search:', value);
   };
+  <Select
+    showSearch
+    placeholder="Select a person"
+    optionFilterProp="children"
+    onChange={onChange}
+    onSearch={onSearch}
+    filterOption={(input, option) =>
+      (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+    }
+    options={[
+      {
+        value: 'jack',
+        label: 'Jack',
+      },
+      {
+        value: 'lucy',
+        label: 'Lucy',
+      },
+      {
+        value: 'tom',
+        label: 'Tom',
+      },
+    ]}
+  />
 
   // //---AVATAR----
   // function generateAvatar(
@@ -294,12 +398,6 @@ const App = () => {
       ),
   });
 
-  // const getSearchProps = (input)=> ({
-  //   // <div>
-
-  //   // </div>
-  // });
-
 
   const columns = [
     {
@@ -309,12 +407,6 @@ const App = () => {
       render: () => <EllipsisOutlined />,
     },
     {
-      title: '',
-      dataIndex: '',
-      key: 'status',
-
-    },
-    {
       title: 'ID',
       dataIndex: 'id',
       key: 'id',
@@ -322,59 +414,32 @@ const App = () => {
       ...getColumnSearchProps('id'),
     },
     {
-      title: <span><UserOutlined />  Tên Nhân Viên</span>,
+      title: <span><TeamOutlined />  Tên Phòng ban</span>,
+      dataIndex: 'department',
+      key: 'department',
+      width: 250,
+      ...getColumnSearchProps('department'),
+    },
+    {
+      title: <span><UserOutlined />  Quản lý</span>,
       dataIndex: 'name',
+      // <span>
+      //   <Space size={16} wrap>
+      //     <Avatar icon={<UserOutlined />} />
+      //   </Space>
+      // </span>,
       key: 'name',
       width: 200,
 
       ...getColumnSearchProps('name'),
+      // fixed: 'left',
     },
     {
-      title: <span><TeamOutlined />  Phòng Ban</span>,
-      dataIndex: 'department',
-      key: 'department',
-      width: 200,
-      ...getColumnSearchProps('department'),
-    },
+      title: <span><BorderlessTableOutlined />  Số nhân viên</span>,
+      width: 150,
+      dataIndex: 'number',
+      key: 'number',
 
-    // {
-    //   title: <span><BorderlessTableOutlined />  Số nhân viên</span>,
-    //   width: 150,
-    //   dataIndex: 'number',
-    //   key: 'number',
-
-    // },
-    {
-      title: <span><PhoneOutlined rotate="90" />  Số Điện Thoại</span>,
-      dataIndex: 'phone',
-      key: 'phone',
-      width: 200,
-    },
-    {
-      title: <span>Giới Tính</span>,
-      dataIndex: 'gender',
-      key: 'gender',
-      width: 100,
-    },
-    {
-      title: '',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (_, { tags }) => (
-        <>
-          {/* {tags.map((tag) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })} */}
-        </>
-      ),
     },
     {
       title: <span><MailOutlined />  Email quản lý</span>,
@@ -383,40 +448,11 @@ const App = () => {
       width: 200,
     },
     {
-      title: <span>Ngân Hàng</span>,
-      dataIndex: 'bank',
-      key: 'bank',
+      title: <span><PhoneOutlined rotate="90" />  Số điện thoại</span>,
+      dataIndex: 'phone',
+      key: 'phone',
       width: 200,
     },
-    {
-      title: <span>Ngày Sinh</span>,
-      dataIndex: 'birthday',
-      key: 'birthday',
-      width: 200,
-    },
-    {
-      title: <span>Địa Chỉ</span>,
-      dataIndex: 'address',
-      key: 'address',
-      width: 300,
-      ...getColumnSearchProps('address'),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ['descend', 'ascend'],
-    },
-    {
-      title: <span>Quốc Gia</span>,
-      dataIndex: 'nationality',
-      key: 'nationality',
-      width: 150,
-    },
-    {
-      title: <span>TK Ngân Hàng</span>,
-      dataIndex: 'bankNumber',
-      key: 'bankNumber',
-      width: 200,
-    },
-
-
     // {
     //   title: 'Action',
     //   key: 'operation',
@@ -426,7 +462,7 @@ const App = () => {
     // {
     //   title: 'Address',
     //   dataIndex: 'address',
-    //   key: 'address',
+    //   key: '250px',
     //   ...getColumnSearchProps('address'),
     //   sorter: (a, b) => a.address.length - b.address.length,
     //   sortDirections: ['descend', 'ascend'],
@@ -435,7 +471,6 @@ const App = () => {
   return (
     <Layout
       style={{
-        // backgroundColor: "unset",
         // minHeight: '100vh',
         // height: '100vh',
 
@@ -445,9 +480,8 @@ const App = () => {
         theme='light'
         collapsible collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
-        
-        width={'265px'}
-      // style={{}}
+        width={'20%'}
+
       >
         <div className="demo-logo-vertical" />
         <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} style={{ width: '100%' }} />
@@ -455,9 +489,8 @@ const App = () => {
       <Layout
         style={{
           // minHeight: '100vh',
-          border: 'none',
           backgroundColor: '#dddddd',
-          minWidth: '100vh',
+
         }}
       >
         <Header
@@ -468,7 +501,7 @@ const App = () => {
             margin: '0 0.5px 0.5px',
           }}
         >
-          <span>Danh sách nhân viên</span>
+          <span>Danh sách phòng ban</span>
           <button style={{ float: 'right', fontSize: '25px', color: '#1677ff' }}>
             <UploadOutlined
               rotate={90}
@@ -499,7 +532,7 @@ const App = () => {
             // boxShadowC
           }}
         >
-          {/* <div
+          <div
             style={{
               display: 'block',
               margin: '2px 50px',
@@ -509,13 +542,8 @@ const App = () => {
               backgroundColor: 'white',
               minHeight: '60px',
               flexWrap: 'nowrap',
-              alignItems: 'center'
             }}
           >
-            <div style={{display: 'inline-block', bottom: 10}}>
-              <Input style={{display: 'inline-block', width: 200}}/>
-
-            </div>
             <span
               style={{
                 margin: '20px 0 0 50px',
@@ -530,24 +558,26 @@ const App = () => {
             >
               <PlusOutlined /> Thêm phòng ban
             </span>
-          </div> */}
+          </div>
           <div
             style={{
               margin: '20px 0 80px 0',
               padding: '0 50px',
               minHeight: 360,
-              // border: 'none',
-              // background: colorBgContainer,
+              background: colorBgContainer,
             }}
           >
-            <Routes>
-              <Route path='/' element={<Index/>} />
-              <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/phongban' element={<PhongBan />} />
-              <Route path='/allstaff' element={<AllStaff />} />
-            </Routes>
+            <Table
+              columns={columns}
+              dataSource={data}
+              style={{ boxShadow: '2px 2px 5px 2px rgba(0,0,0,0.3)', }}
+              scroll={{
+                x: 1500,
+                y: 400,
+              }}
+            />
           </div>
-        
+
 
         </Content>
       </Layout>
